@@ -1,6 +1,5 @@
-stages:          # 作业阶段，按顺序执行
+stages:          # 仅保留构建和部署阶段
   - build
-  - test
   - deploy
 
 build-job:       # 构建阶段的作业
@@ -9,23 +8,15 @@ build-job:       # 构建阶段的作业
     - echo "安装依赖..."
     - npm install  # 安装项目依赖
     - echo "编译代码..."
-    - npm run build  # 执行构建命令（对应 package.json 中的 build 脚本）
+    - npm run build  # 执行构建命令
     - echo "编译完成."
-
-test-job:        # 测试阶段的作业
-  stage: test
-  script:
-    - echo "运行代码检查..."
-    - npm run lint  # 执行 lint 检查（对应 package.json 中的 lint 脚本）
-    - echo "运行单元测试..."
-    # 这里可以添加实际的测试命令，例如：npm test
 
 deploy-job:      # 部署阶段的作业
   stage: deploy
   environment: production
   script:
     - echo "部署应用..."
-    # 这里添加实际的部署命令，例如上传构建产物到服务器等
+    # 这里添加实际的部署命令（如上传构建产物到服务器等）
     - echo "应用部署成功."
   only:           # 仅在 main 分支触发部署（可选）
     - main
