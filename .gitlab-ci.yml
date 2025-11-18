@@ -4,10 +4,9 @@ pages:
   script:
     - npm install
     - npm run build
-    # 先清空public目录（若存在），再创建并移动文件
-    - rm -rf public/*  # 清空public下的所有内容（避免目录冲突）
-    - mkdir -p public  # 确保public目录存在
-    - mv dist/* public/  # 移动构建产物
+    - rm -rf public  # 彻底删除public目录（包括所有子目录和文件）
+    - mkdir -p public  # 重新创建空的public目录
+    - mv dist/* public/  # 此时移动文件不会有冲突
   artifacts:
     paths:
       - public
