@@ -1,24 +1,10 @@
-stages:          # 仅保留构建和部署阶段
-  - build
-  - deploy
-
-build-job:       # 构建阶段的作业
-  stage: build
-  image: node:22  # 使用Node.js 22镜像
-  script:
-    - echo "安装依赖..."
-    - npm install  # 安装项目依赖
-    - echo "编译代码..."
-    - npm run build  # 执行构建命令
-    - echo "编译完成."
-
-deploy-job:      # 部署阶段的作业
+image: node:22  # 指定使用 Node.js 22 版本
+pages:
   stage: deploy
-  image: node:22  # 部署阶段也使用Node.js 22镜像
-  environment: production
   script:
-    - echo "部署应用..."
-    # 这里添加实际的部署命令（如上传构建产物到服务器等）
-    - echo "应用部署成功."
-  only:           # 仅在 main 分支触发部署（可选）
-    - main
+    - npm install  # 安装依赖
+    - npm run build  # 执行构建命令
+    - mv dist/* public/  # 移动构建产物到public
+  artifacts:
+    paths:
+      - public 
