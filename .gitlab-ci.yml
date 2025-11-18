@@ -4,6 +4,7 @@ stages:          # 仅保留构建和部署阶段
 
 build-job:       # 构建阶段的作业
   stage: build
+  image: node:22  # 使用Node.js 22镜像
   script:
     - echo "安装依赖..."
     - npm install  # 安装项目依赖
@@ -13,6 +14,7 @@ build-job:       # 构建阶段的作业
 
 deploy-job:      # 部署阶段的作业
   stage: deploy
+  image: node:22  # 部署阶段也使用Node.js 22镜像
   environment: production
   script:
     - echo "部署应用..."
