@@ -5,7 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 function Test() {
-  const { scene } = useLoader(GLTFLoader, '/models/african-olive-tree.glb');
+  const { scene } = useLoader(GLTFLoader, '/olive/dist/models/african-olive-tree.glb');
   const { camera, gl } = useThree();
 
   useEffect(() => {
